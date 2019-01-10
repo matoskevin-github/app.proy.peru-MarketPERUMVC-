@@ -1,0 +1,7 @@
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\bin\Debug\MarketPERU.AccesoDatos.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\bin\Debug\MarketPERU.AccesoDatos.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\bin\Debug\MarketPERU.Entidades.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\bin\Debug\MarketPERU.Entidades.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\obj\Debug\MarketPERU.AccesoDatos.csprojResolveAssemblyReference.cache
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\obj\Debug\MarketPERU.AccesoDatos.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.AccesoDatos\obj\Debug\MarketPERU.AccesoDatos.pdb

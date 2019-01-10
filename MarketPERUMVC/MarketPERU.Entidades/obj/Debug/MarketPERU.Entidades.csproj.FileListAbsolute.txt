@@ -1,0 +1,5 @@
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.Entidades\bin\Debug\MarketPERU.Entidades.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.Entidades\bin\Debug\MarketPERU.Entidades.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.Entidades\obj\Debug\MarketPERU.Entidades.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.Entidades\obj\Debug\MarketPERU.Entidades.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.Entidades\obj\Debug\MarketPERU.Entidades.csprojResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.LogicaNegocio.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.LogicaNegocio.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.AccesoDatos.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.Entidades.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.AccesoDatos.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\bin\Debug\MarketPERU.Entidades.pdb
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\obj\Debug\MarketPERU.LogicaNegocio.csprojResolveAssemblyReference.cache
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\obj\Debug\MarketPERU.LogicaNegocio.dll
+D:\AplicacionesNET\MarketPERUMVC\MarketPERU.LogicaNegocio\obj\Debug\MarketPERU.LogicaNegocio.pdb

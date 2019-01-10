@@ -1,0 +1,371 @@
+﻿<script>
+    $(document).ready(function () {
+        CargarProveedores();
+    });
+
+    function CargarProveedores() {
+        $.ajax({
+            url: "/Home/ListaProveedores",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.IdProveedor + '</td>';
+                    html += '<td>' + item.Nombre + '</td>';
+                    html += '<td>' + item.Representante + '</td>';
+                    html += '<td>' + item.Direccion + '</td>';
+                    html += '<td>' + item.Ciudad + '</td>';
+                    html += '<td>' + item.Departamento + '</td>';
+                    html += '<td>' + item.CodigoPostal + '</td>';
+                    html += '<td>' + item.Telefono + '</td>';
+                    html += '<td>' + item.Fax + '</td>';
+                    html += '<td><a href="#" onclick="ObtenerProveedorId(' + item.IdProveedor + ')">Editar</a> | <a href="#" onclick="EliminarProveedor(' + item.IdProveedor + ')">Eliminar</a></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    function AgregarProveedor() {
+        var res = ValidarCampos();
+        if (res == false) {
+            return false;
+        }
+
+        var empObj = {
+            IdProveedor: $('#IdProveedor').val(),
+            Nombre: $('#Nombre').val(),
+            Representante: $('#Representante').val(),
+            Direccion: $('#Direccion').val(),
+            Ciudad: $('#Ciudad').val(),
+            Departamento: $('#Departamento').val(),
+            CodigoPostal: $('#CodigoPostal').val(),
+            Telefono: $('#Telefono').val(),
+            Fax: $('#Fax').val()
+        };
+
+        $.ajax({
+            url: "/Home/GuardarProveedor",
+            data: JSON.stringify(empObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                CargarProveedores();
+                $('#myModal').modal('hide');
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    function ActualizarProveedor() {
+        var res = ValidarCampos();
+        if (res == false) {
+            return false;
+        }
+        var empObj = {
+            IdProveedor: $('#IdProveedor').val(),
+            Nombre: $('#Nombre').val(),
+            Representante: $('#Representante').val(),
+            Direccion: $('#Direccion').val(),
+            Ciudad: $('#Ciudad').val(),
+            Departamento: $('#Departamento').val(),
+            CodigoPostal: $('#CodigoPostal').val(),
+            Telefono: $('#Telefono').val(),
+            Fax: $('#Fax').val()
+        };
+
+        $.ajax({
+            url: "/Home/ActualizarProveedor",
+            data: JSON.stringify(empObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                CargarProveedores();
+                $('#myModal').modal('hide');
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    function EliminarProveedor(IdProveedor) {
+        var ans = confirm("Esta seguro de eliminar el registro?");
+        if (ans) {
+            $.ajax({
+                url: "/Home/EliminarProveedor?IdProveedor=" + IdProveedor,
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    CargarProveedores();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    }
+
+    //Function for getting the Data Based upon Proveedor ID
+    function ObtenerProveedorId(IdProveedor) {
+        $('#IdProveedor').css('border-color', 'lightgrey');
+        $('#Nombre').css('border-color', 'lightgrey');
+        $('#Representante').css('border-color', 'lightgrey');
+        $('#Direccion').css('border-color', 'lightgrey');
+        $('#Ciudad').css('border-color', 'lightgrey');
+        $('#Departamento').css('border-color', 'lightgrey');
+        $('#CodigoPostal').css('border-color', 'lightgrey');
+        $('#Telefono').css('border-color', 'lightgrey');
+        $('#Fax').css('border-color', 'lightgrey');
+        $.ajax({
+            url: "/Home/ObtenerProveedor?IdProveedor=" + IdProveedor,
+            typr: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (result) {
+                $('#IdProveedor').val(result.IdProveedor);
+                $('#Nombre').val(result.Nombre);
+                $('#Representante').val(result.Representante);
+                $('#Direccion').val(result.Direccion);
+                $('#Ciudad').val(result.Ciudad);
+                $('#Departamento').val(result.Departamento);
+                $('#CodigoPostal').val(result.CodigoPostal);
+                $('#Telefono').val(result.Telefono);
+                $('#Fax').val(result.Fax);
+                $('#myModal').modal('show');
+                $('#btnActualizar').show();
+                $('#btnAgregar').hide();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+        return false;
+    }
+
+    function ValidarCampos() {
+        var isValid = true;
+
+        if ($('#Nombre').val().trim() == "") {
+            $('#Nombre').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Nombre').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Representante').val().trim() == "") {
+            $('#Representante').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Representante').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Direccion').val().trim() == "") {
+            $('#Direccion').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Direccion').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Ciudad').val().trim() == "") {
+            $('#Ciudad').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Ciudad').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Departamento').val().trim() == "") {
+            $('#Departamento').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Departamento').css('border-color', 'lightgrey');
+        }
+
+        if ($('#CodigoPostal').val().trim() == "") {
+            $('#CodigoPostal').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#CodigoPostal').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Telefono').val().trim() == "") {
+            $('#Telefono').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Telefono').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Fax').val().trim() == "") {
+            $('#Fax').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Fax').css('border-color', 'lightgrey');
+        }
+        return isValid;
+    }
+
+    function LimpiarCampos() {
+        $('#IdProveedor').val("");
+        $('#Nombre').val("");
+        $('#Representante').val("");
+        $('#Direccion').val("");
+        $('#Ciudad').val("");
+        $('#Departamento').val("");
+        $('#CodigoPostal').val("");
+        $('#Telefono').val("");
+        $('#Fax').val("");
+        $('#btnActualizar').hide();
+        $('#btnAgregar').show();
+        $('#Nombre').css('border-color', 'lightgrey');
+        $('#Representante').css('border-color', 'lightgrey');
+        $('#Direccion').css('border-color', 'lightgrey');
+        $('#Ciudad').css('border-color', 'lightgrey');
+        $('#Departamento').css('border-color', 'lightgrey');
+        $('#CodigoPostal').css('border-color', 'lightgrey');
+        $('#Telefono').css('border-color', 'lightgrey');
+        $('#Fax').css('border-color', 'lightgrey');
+    }
+</script>
+
+<div class="container">
+    <h2>Registro Proveedores</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="LimpiarCampos()">Agregar Nuevo Proveedor</button><br /><br />
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    IdProveedor
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Representante
+                </th>
+                <th>
+                    Direccion
+                </th>
+                <th>
+                    Ciudad
+                </th>
+                <th>
+                    Departamento
+                </th>
+                <th>
+                    Codigo Postal
+                </th>
+                <th>
+                    Telefono
+                </th>
+                <th>
+                    Telefono
+                </th>
+                <th>
+                    Accion
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+    </table>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Proveedor</h4>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="IdProveedor">IdProveedor</label>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" id="IdProveedor" placeholder="Id" disabled="disabled" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Nombre">Nombre</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Nombre" placeholder="Ingrese Nombre" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Representante">Representante</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Representante" placeholder="Ingrese Representante" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Direccion">Direccion</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Direccion" placeholder="Ingrese Direccion" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Ciudad">Ciudad</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Ciudad" placeholder="Ingrese Ciudad" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Departamento">Departamento</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Departamento" placeholder="Ingrese Departamento" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="CodigoPostal">Codigo Postal</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="CodigoPostal" placeholder="Ingrese Codigo Postal" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Telefono">Telefono</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Telefono" placeholder="Ingrese Telefono" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label" for="Fax">Fax</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="Fax" placeholder="Ingrese Fax" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAgregar" style="display:none;" onclick="AgregarProveedor()">Agregar</button>
+                <button type="button" class="btn btn-primary" id="btnActualizar" style="display:none;" onclick="ActualizarProveedor()">Actualizar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>*
